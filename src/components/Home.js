@@ -24,7 +24,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h1>프론트 개발 이슈 테스트</h1>
+        <h1>관리자 개발 이슈 테스트</h1>
       </div>
     );
   }

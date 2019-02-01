@@ -15,6 +15,8 @@ import shortid from 'shortid';
 import Helper from './utils/Helper';
 import Constant from './config/Constant';
 
+import MaterialDatePicker from './components/date-picker/MaterialDatePicker';
+
 @withRouter
 @inject('appStore')
 @observer
@@ -102,7 +104,7 @@ class App extends Component {
     let textAreaId = shortid.generate();
     let DEV_TOOL_COMPONENT = null;
     if (process.env.APP_ENV === Constant.APP_ENV_DEVELOPMENT) {
-      DEV_TOOL_COMPONENT = <DevTools />;
+      // DEV_TOOL_COMPONENT = <DevTools />;
     }
 
     return (
@@ -113,6 +115,7 @@ class App extends Component {
           <div style={mainContainerStyle}>
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/material-date" component={MaterialDatePicker} />
           </div>
           {/* {라우팅 설정 end} */}
           <LoadingBarContainer />
