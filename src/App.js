@@ -4,6 +4,8 @@ import { observer, inject } from 'mobx-react';
 import { Route, withRouter } from 'react-router-dom';
 import SideNavigation from './components/SideNavigation';
 import Home from './components/Home';
+import Login from './Login';
+import SignUp from './SignUp';
 import LoadingBarContainer from './containers/LoadingBarContainer';
 import ErrorBoundary from './components/ErrorBoundary';
 
@@ -115,6 +117,8 @@ class App extends Component {
           <div style={mainContainerStyle}>
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={SignUp} />
             <Route exact path="/material-date" component={MaterialDatePicker} />
           </div>
           {/* {라우팅 설정 end} */}
