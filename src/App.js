@@ -81,6 +81,8 @@ class App extends Component {
     Logger.info('App init call');
     Logger.info('process.env : ' + JSON.stringify(process.env));
     window.onerror = this.handleGlobalError;
+    // let location = this.props.location;
+    // location.pathname ---> 공통 권한 체크 유틸로 처리하기
     this.historyBlockHandler = this.props.history.block((location, action) => {
       Logger.info('on route block');
       return true;

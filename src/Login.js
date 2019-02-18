@@ -2,6 +2,7 @@ import React from 'react';
 
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
 @withRouter
 @inject('appStore', 'uiStore')
@@ -10,10 +11,18 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.moveHome = this.moveHome.bind(this);
+  }
+
+  moveHome() {
+    this.props.history.push('/home');
   }
 
   componentDidMount() {
     this.props.uiStore.hideNavigation();
+    // let defParams = this.props.match.params;
+    // let search = this.props.location.search;
+    // let urlQuery = queryString.parse(search);
   }
 
   render() {
@@ -65,7 +74,11 @@ class Login extends React.Component {
             <input type="checkbox" value="remember-me" /> Remember me
           </label>
         </div>
-        <button className="btn btn-lg btn-primary btn-block" type="submit">
+        <button
+          className="btn btn-lg btn-primary btn-block"
+          type="button"
+          onClick={this.moveHome}
+        >
           Sign in
         </button>
         <p className="mt-5 mb-3 text-muted text-center">© 2017-2019</p>

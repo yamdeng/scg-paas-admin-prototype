@@ -10,6 +10,13 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.refreshPage = this.refreshPage.bind(this);
+  }
+
+  refreshPage() {
+    // axios를 이용해야 할듯. 공통 필터는 사용않하는게 맞음
+    window.location.href = '/#';
+    window.location.reload();
   }
 
   componentDidMount() {}
@@ -51,7 +58,11 @@ class SignUp extends React.Component {
             <input type="checkbox" value="remember-me" /> Remember me
           </label>
         </div>
-        <button className="btn btn-lg btn-primary btn-block" type="submit">
+        <button
+          className="btn btn-lg btn-primary btn-block"
+          type="button"
+          onClick={this.refreshPage}
+        >
           Sign in
         </button>
         <p className="mt-5 mb-3 text-muted">© 2017-2019</p>
