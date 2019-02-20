@@ -100,7 +100,7 @@ class App extends Component {
   }
 
   render() {
-    let mainContainerStyle = { marginTop: 60 };
+    let mainContainerStyle = { marginTop: 0 };
     let errorObjectConvertString = '';
     if (this.state.appErrorObject) {
       errorObjectConvertString = JSON.stringify(this.state.appErrorObject);
@@ -113,10 +113,45 @@ class App extends Component {
 
     return (
       <ErrorBoundary>
-        <div>
+        <div className="wrapper">
           {DEV_TOOL_COMPONENT}
           <SideNavigation />
-          <div style={mainContainerStyle}>
+          <div style={mainContainerStyle} id="content">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+              <div className="container-fluid">
+                <button
+                  type="button"
+                  id="sidebarCollapse"
+                  className="btn btn-info"
+                >
+                  <i className="fas fa-align-left" />
+                </button>
+                <button
+                  className="btn btn-dark d-inline-block d-lg-none ml-auto"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <i className="fas fa-align-justify" />
+                </button>
+
+                <div
+                  className="collapse navbar-collapse"
+                  id="navbarSupportedContent"
+                >
+                  <ul className="nav navbar-nav ml-auto">
+                    <li className="nav-item active">
+                      <a className="nav-link" href="javascript:void(0);">
+                        로그아웃
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/login" component={Login} />

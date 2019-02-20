@@ -1,9 +1,10 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/common.scss';
 import './index.css';
 import './sign.css';
+import './navigation.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import SignUp from './SignUp';
 import App2 from './App2';
