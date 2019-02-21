@@ -2,6 +2,7 @@ import DevTools from 'mobx-react-devtools';
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Route, withRouter } from 'react-router-dom';
+import classNames from 'classnames';
 import SideNavigation from './components/SideNavigation';
 import Home from './components/Home';
 import Login from './Login';
@@ -20,7 +21,7 @@ import Constant from './config/Constant';
 import MaterialDatePicker from './components/date-picker/MaterialDatePicker';
 
 @withRouter
-@inject('appStore')
+@inject('appStore', 'uiStore')
 @observer
 class App extends Component {
   historyBlockHandler = null;
@@ -31,6 +32,15 @@ class App extends Component {
     this.handleGlobalError = this.handleGlobalError.bind(this);
     this.closeErrorModal = this.closeErrorModal.bind(this);
     this.copyToClipboardByTextArea = this.copyToClipboardByTextArea.bind(this);
+    this.toggleNavigation = this.toggleNavigation.bind(this);
+  }
+
+  toggleNavigation() {
+    if (this.props.uiStore.hideSideNavigation) {
+      this.props.uiStore.showNavigation();
+    } else {
+      this.props.uiStore.hideNavigation();
+    }
   }
 
   handleGlobalError(message, url, lineNumber, column, errorObject) {
@@ -116,13 +126,20 @@ class App extends Component {
         <div className="wrapper">
           {DEV_TOOL_COMPONENT}
           <SideNavigation />
-          <div style={mainContainerStyle} id="content">
+          <div
+            style={mainContainerStyle}
+            id="content"
+            className={classNames({
+              active: this.props.uiStore.hideSideNavigation
+            })}
+          >
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
               <div className="container-fluid">
                 <button
                   type="button"
                   id="sidebarCollapse"
                   className="btn btn-info"
+                  onClick={this.toggleNavigation}
                 >
                   <i className="fas fa-align-left" />
                 </button>
