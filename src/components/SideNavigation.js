@@ -90,7 +90,15 @@ const menuMappingInfos = [
     ]
   },
   {
+    title: '로컬 네비게이션',
+    linkUrl: '/네비게이션'
+  },
+  {
     title: '드래그앤드랍',
+    linkUrl: '/dragdrop'
+  },
+  {
+    title: '로딩바, noti, alert, confirm',
     linkUrl: '/dragdrop'
   }
 ];

@@ -22,6 +22,7 @@ import MaterialDatePicker from './components/date-picker/MaterialDatePicker';
 import TableTest from './components/table/TableTest';
 import TablePaging from './components/table/TablePaging';
 import TableFilter from './components/table/TableFilter';
+import FormDetail from './components/form/FormDetail';
 
 @withRouter
 @inject('appStore', 'uiStore')
@@ -180,6 +181,7 @@ class App extends Component {
             <Route exact path="/table/test" component={TableTest} />
             <Route exact path="/table/paging" component={TablePaging} />
             <Route exact path="/table/filter" component={TableFilter} />
+            <Route exact path="/form/detail" component={FormDetail} />
           </div>
           {/* {라우팅 설정 end} */}
           <LoadingBarContainer />

@@ -153,3 +153,13 @@ option[value=''][disabled] {
 .none {
   display: none !important;
 }
+
+.form-test .row {
+  margin: 0px 5px;
+  background-color: green;
+}
+
+.form-test .row .col {
+  padding: 5px;
+  border: 2px solid black;
+}
