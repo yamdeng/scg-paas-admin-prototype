@@ -35,7 +35,13 @@ class TableTest extends React.Component {
                 <tr>
                   <td>{info.id}</td>
                   <td>{info.name}</td>
-                  <td>{info.platform}</td>
+                  <td>
+                    {info.platform}
+                    <span class="badge badge-pill badge-primary">Primary</span>
+                    <span class="badge badge-pill badge-secondary">
+                      Secondary
+                    </span>
+                  </td>
                 </tr>
               );
             })}
