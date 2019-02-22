@@ -23,6 +23,8 @@ import TableTest from './components/table/TableTest';
 import TablePaging from './components/table/TablePaging';
 import TableFilter from './components/table/TableFilter';
 import FormDetail from './components/form/FormDetail';
+import FormPopup from './components/form/FormPopup';
+import FormEdit from './components/form/FormEdit';
 
 @withRouter
 @inject('appStore', 'uiStore')
@@ -181,7 +183,9 @@ class App extends Component {
             <Route exact path="/table/test" component={TableTest} />
             <Route exact path="/table/paging" component={TablePaging} />
             <Route exact path="/table/filter" component={TableFilter} />
-            <Route exact path="/form/detail" component={FormDetail} />
+            <Route path="/form/detail" component={FormDetail} />
+            <Route exact path="/form/detail/popup" component={FormPopup} />
+            <Route exact path="/form/create" component={FormEdit} />
           </div>
           {/* {라우팅 설정 end} */}
           <LoadingBarContainer />

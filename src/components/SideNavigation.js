@@ -21,10 +21,8 @@ const menuMappingInfos = [
     linkUrl: '',
     childId: 'form',
     child: [
-      { title: '상세', linkUrl: '/form/detail' },
-      { title: '등록', linkUrl: '/form/create' },
-      { title: '수정', linkUrl: '/form/edit' },
-      { title: '팝업', linkUrl: '/form/popup' }
+      { title: '상세/popup', linkUrl: '/form/detail' },
+      { title: '등록/수정', linkUrl: '/form/create' }
     ]
   },
   {

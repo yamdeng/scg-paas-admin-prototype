@@ -2,7 +2,9 @@ import React from 'react';
 
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
+import { Modal, ModalBody } from 'reactstrap';
 import Api from '../../utils/Api';
+import AppHistory from '../../utils/AppHistory';
 
 @withRouter
 @inject('appStore')
@@ -10,7 +12,21 @@ import Api from '../../utils/Api';
 class FormDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { data: [] };
+    this.state = { isOpen: false };
+    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({ isOpen: true });
+  }
+
+  closeModal() {
+    this.setState({ isOpen: false });
+  }
+
+  openModalByRoute() {
+    AppHistory.push('/form/detail/popup');
   }
 
   componentDidMount() {}
@@ -28,10 +44,26 @@ class FormDetail extends React.Component {
           <div class="col col-9">값4</div>
         </div>
         <div class="row">
-          <button type="button" class="btn btn-primary">
-            popup
+          <button
+            type="button"
+            class="btn btn-primary"
+            onClick={this.openModal}
+          >
+            popup manual
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            onClick={this.openModalByRoute}
+          >
+            popup route
           </button>
         </div>
+        <Modal isOpen={this.state.isOpen} toggle={this.closeModal}>
+          <ModalBody>
+            <p>modal huhu</p>
+          </ModalBody>
+        </Modal>
       </div>
     );
   }
