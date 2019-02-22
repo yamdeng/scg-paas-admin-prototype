@@ -26,10 +26,6 @@ const menuMappingInfos = [
     ]
   },
   {
-    title: 'badge',
-    linkUrl: '/badge'
-  },
-  {
     title: '파일업로드',
     linkUrl: '/fileupload'
   },
@@ -37,10 +33,7 @@ const menuMappingInfos = [
     title: 'color 컴포넌트',
     linkUrl: '',
     childId: 'color',
-    child: [
-      { title: '테스트', linkUrl: '/color/test' },
-      { title: '폼연동', linkUrl: '/color/form' }
-    ]
+    child: [{ title: '테스트', linkUrl: '/color/test' }]
   },
   {
     title: 'select 컴포넌트',

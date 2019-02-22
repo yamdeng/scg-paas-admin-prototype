@@ -25,6 +25,7 @@ import TableFilter from './components/table/TableFilter';
 import FormDetail from './components/form/FormDetail';
 import FormPopup from './components/form/FormPopup';
 import FormEdit from './components/form/FormEdit';
+import ColorTest from './components/color/ColorTest';
 
 @withRouter
 @inject('appStore', 'uiStore')
@@ -186,6 +187,7 @@ class App extends Component {
             <Route path="/form/detail" component={FormDetail} />
             <Route exact path="/form/detail/popup" component={FormPopup} />
             <Route exact path="/form/create" component={FormEdit} />
+            <Route exact path="/color/test" component={ColorTest} />
           </div>
           {/* {라우팅 설정 end} */}
           <LoadingBarContainer />
