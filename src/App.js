@@ -26,6 +26,7 @@ import FormDetail from './components/form/FormDetail';
 import FormPopup from './components/form/FormPopup';
 import FormEdit from './components/form/FormEdit';
 import ColorTest from './components/color/ColorTest';
+import SelectTest from './components/select/SelectTest';
 
 @withRouter
 @inject('appStore', 'uiStore')
@@ -188,6 +189,7 @@ class App extends Component {
             <Route exact path="/form/detail/popup" component={FormPopup} />
             <Route exact path="/form/create" component={FormEdit} />
             <Route exact path="/color/test" component={ColorTest} />
+            <Route exact path="/select/test" component={SelectTest} />
           </div>
           {/* {라우팅 설정 end} */}
           <LoadingBarContainer />
