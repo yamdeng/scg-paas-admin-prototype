@@ -1,0 +1,23 @@
+{
+  "files.autoSave": "off",
+  "window.zoomLevel": 1,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.snippetSuggestions": "top",
+  "editor.tabSize": 2,
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "prettier.eslintIntegration": true,
+  "prettier.disableLanguages": ["markdown", "json", "css"],
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true
+  },
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "sync.gist": "4e237176311efc5efb5c3f17ae17070e",
+  "sync.quietSync": false
+}
