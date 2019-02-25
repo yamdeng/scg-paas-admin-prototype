@@ -106,6 +106,8 @@ class SideNavigation extends React.Component {
   clickMenu() {}
 
   render() {
+    // let menuMappingInfos = menuMappingInfos;
+    let menuMappingInfos = this.props.companyStore.menuInfo;
     return (
       <nav
         id="sidebar"
@@ -114,7 +116,14 @@ class SideNavigation extends React.Component {
         })}
       >
         <div className="sidebar-header">
-          <h3>관리자 이슈 테스트</h3>
+          <h3>
+            {this.props.appStore.loginInfo
+              ? this.props.appStore.loginInfo.name +
+                '(' +
+                this.props.appStore.loginInfo.login_id +
+                ')'
+              : null}
+          </h3>
         </div>
         <ul className="list-unstyled components">
           {menuMappingInfos.map(menuInfo => {

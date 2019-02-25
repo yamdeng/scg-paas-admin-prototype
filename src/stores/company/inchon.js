@@ -18,18 +18,7 @@ let companyInfo = {
   }
 };
 
-let menuInfo = [
-  { title: '디바이스', linkUrl: '/device-basic', except: true },
-  { title: '하단영역 선택', linkUrl: '/footer-select', except: true },
-  { title: '라디오 스위치', linkUrl: '/checkbox-switch', except: true },
-  { title: '탭 스크롤', linkUrl: '/tab-scroll', except: true },
-  { title: '아코디언 부트스트랩', linkUrl: '/accordion-b', except: true },
-  {
-    title: 'company-inchon-test',
-    linkUrl: '/company-inchon-test',
-    success: true
-  }
-];
+let menuInfo = [{ title: '인천전용 메뉴', linkUrl: '/inchon/test' }];
 
 let configInfo = {
   contractInputFirstSize: 5,
@@ -46,7 +35,7 @@ export const inchonCompanyInfo = _.defaultsDeep(
 export const inchonMenuInfo = _.unionBy(
   menuInfo,
   basicMenuInfo,
-  'linkUrl'
+  'title'
 ).filter(info => {
   return !info.except;
 });

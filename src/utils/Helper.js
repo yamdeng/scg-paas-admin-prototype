@@ -59,13 +59,18 @@ function getInfoByLocalStorage(key) {
   }
 }
 
+function removeInfoByLocalStorage(key) {
+  localStorage.removeItem(key);
+}
+
 const Helper = {
   convertEmptyValue: convertEmptyValue,
   checkAuthByUrl: checkAuthByUrl,
   getQueryStringValue: getQueryStringValue,
   copyToClipboard: copyToClipboard,
   saveInfoToLocalStorage: saveInfoToLocalStorage,
-  getInfoByLocalStorage: getInfoByLocalStorage
+  getInfoByLocalStorage: getInfoByLocalStorage,
+  removeInfoByLocalStorage: removeInfoByLocalStorage
 };
 
 export default Helper;

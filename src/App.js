@@ -31,7 +31,7 @@ import ColorTest from './components/color/ColorTest';
 import SelectTest from './components/select/SelectTest';
 
 @withRouter
-@inject('appStore', 'uiStore')
+@inject('appStore', 'uiStore', 'companyStore')
 @observer
 class App extends Component {
   historyBlockHandler = null;
@@ -43,6 +43,7 @@ class App extends Component {
     this.closeErrorModal = this.closeErrorModal.bind(this);
     this.copyToClipboardByTextArea = this.copyToClipboardByTextArea.bind(this);
     this.toggleNavigation = this.toggleNavigation.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   toggleNavigation() {
@@ -109,6 +110,12 @@ class App extends Component {
     });
   }
 
+  logout() {
+    Helper.removeInfoByLocalStorage('authToken');
+    window.location.href = '/#/?appType=login';
+    window.location.reload();
+  }
+
   componentDidMount() {
     this.init();
     let search = this.props.location.search;
@@ -123,6 +130,7 @@ class App extends Component {
         .then(result => {
           let loginInfo = result.data.loginInfo;
           this.props.appStore.setLoginInfo(loginInfo);
+          this.props.companyStore.setCompanyCode(loginInfo.company);
         })
         .catch(error => {
           window.location.href = '/#/?appType=login';
@@ -188,11 +196,17 @@ class App extends Component {
                   id="navbarSupportedContent"
                 >
                   <ul className="nav navbar-nav ml-auto">
-                    <li className="nav-item active">
-                      <a className="nav-link" href="javascript:void(0);">
-                        로그아웃
-                      </a>
-                    </li>
+                    {this.props.appStore.loginInfo ? (
+                      <li className="nav-item active">
+                        <a
+                          className="nav-link"
+                          href="javascript:void(0);"
+                          onClick={this.logout}
+                        >
+                          로그아웃
+                        </a>
+                      </li>
+                    ) : null}
                   </ul>
                 </div>
               </div>

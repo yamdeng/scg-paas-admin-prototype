@@ -23,27 +23,7 @@ let companyInfo = {
   }
 };
 
-let menuInfo = [
-  { title: '홈', linkUrl: '/home', except: true },
-  { title: '아코디언 부트스트랩', linkUrl: '/accordion-b', except: true },
-  {
-    title: '아코디언 메트리얼',
-    linkUrl: '/accordion-m?aa=aa&bb=bb',
-    except: true
-  },
-  { title: '탭 부트스트랩', linkUrl: '/tab-b', except: true },
-  { title: '탭 메트리얼', linkUrl: '/tab-m', except: true },
-  {
-    title: 'company-code-test',
-    linkUrl: '/company-code-test',
-    success: true
-  },
-  {
-    title: 'company-seoul-test',
-    linkUrl: '/company-seoul-test',
-    success: true
-  }
-];
+let menuInfo = [{ title: '서울전용 메뉴', linkUrl: '/seoul/test' }];
 
 let configInfo = {
   contractInputFirstSize: 2,
@@ -57,12 +37,10 @@ export const seoulCompanyInfo = _.defaultsDeep(
   basicCompanyInfo
 );
 
-export const seoulMenuInfo = _.unionBy(
-  menuInfo,
-  basicMenuInfo,
-  'linkUrl'
-).filter(info => {
-  return !info.except;
-});
+export const seoulMenuInfo = _.unionBy(menuInfo, basicMenuInfo, 'title').filter(
+  info => {
+    return !info.except;
+  }
+);
 
 export const seoulConfigInfo = _.defaultsDeep({}, configInfo, basicConfigInfo);

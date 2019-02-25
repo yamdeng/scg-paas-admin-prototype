@@ -16,89 +16,89 @@ let companyInfo = {
 };
 
 let menuInfo = [
-  { title: '홈', linkUrl: '/home', success: true },
-  { title: '아코디언 부트스트랩', linkUrl: '/accordion-b', success: true },
+  { title: '홈', linkUrl: '/home' },
   {
-    title: '아코디언 메트리얼',
-    linkUrl: '/accordion-m?aa=aa&bb=bb',
-    success: true
-  },
-  { title: '탭 부트스트랩', linkUrl: '/tab-b', success: true },
-  { title: '탭 메트리얼', linkUrl: '/tab-m', success: true },
-  { title: '디바이스', linkUrl: '/device-basic', success: true },
-  { title: '하단영역 선택', linkUrl: '/footer-select', success: true },
-  { title: '라디오 스위치', linkUrl: '/checkbox-switch', success: true },
-  { title: '탭 스크롤', linkUrl: '/tab-scroll', success: true },
-  { title: '네이티브 인터페이스', linkUrl: '/native-interface', success: true },
-  { title: '모달 테스트1', linkUrl: '/modal-test-1' },
-  { title: 'sass', linkUrl: '/sass', success: true },
-  { title: '환경변수', linkUrl: '/environment', success: true },
-  { title: '에러테스트', linkUrl: '/error-test', success: true },
-  { title: '클라이언트 에러', linkUrl: '/error-client', success: true },
-  { title: '서버 에러', linkUrl: '/error-server', success: true },
-  { title: '권한 에러', linkUrl: '/error-auth', success: true },
-  { title: '상담톡 목록', linkUrl: '/talk-list', success: true },
-  { title: '상담톡 애니메이션', linkUrl: '/talk-anmation' },
-  { title: '푸쉬 테스트1', linkUrl: '/pushcase-1' },
-  { title: 'Analytics', linkUrl: '/analytics' },
-  { title: '폼 테스트', linkUrl: '/form-test' },
-  { title: '차트 테스트1', linkUrl: '/chartcase-1' },
-  {
-    title: '테이블 페이징 스크롤',
-    linkUrl: '/table-page-scroll',
-    success: true
+    title: '테이블',
+    linkUrl: '',
+    childId: 'table',
+    child: [
+      { title: '테스트', linkUrl: '/table/test' },
+      { title: '페이징', linkUrl: '/table/paging' },
+      { title: '검색/정렬', linkUrl: '/table/filter' }
+    ]
   },
   {
-    title: '이미지 페이징 스크롤',
-    linkUrl: '/image-page-scroll',
-    success: true
-  },
-  { title: '리액트 에러 테스트', linkUrl: '/react-error-test', success: true },
-  { title: '퍼블리싱 테스트', linkUrl: '/publish-test', success: true },
-  {
-    title: '불변 자료구조 테스트',
-    linkUrl: '/immutability-test',
-    success: true
+    title: '폼',
+    linkUrl: '',
+    childId: 'form',
+    child: [
+      { title: '상세/popup', linkUrl: '/form/detail' },
+      { title: '등록/수정', linkUrl: '/form/create' }
+    ]
   },
   {
-    title: '불변 자료구조 테스트2',
-    linkUrl: '/immutability-test2',
-    success: true
+    title: '파일업로드',
+    linkUrl: '/fileupload'
   },
   {
-    title: '저장소 테스트',
-    linkUrl: '/store-test',
-    success: true
+    title: 'color 컴포넌트',
+    linkUrl: '',
+    childId: 'color',
+    child: [{ title: '테스트', linkUrl: '/color/test' }]
   },
   {
-    title: '저장소 테스트2',
-    linkUrl: '/store-test2',
-    success: true
+    title: 'select 컴포넌트',
+    linkUrl: '',
+    childId: 'select',
+    child: [{ title: '테스트', linkUrl: '/select/test' }]
   },
   {
-    title: '도메인 테스트(list)',
-    linkUrl: '/domain-list',
-    success: true
+    title: '에디터',
+    linkUrl: '',
+    childId: 'editor',
+    child: [
+      { title: 'ckeditor', linkUrl: '/editor/ckeditor' },
+      { title: 'ckeditor', linkUrl: '/editor/summernote' }
+    ]
   },
   {
-    title: '도메인 테스트(detail)',
-    linkUrl: '/domain-detail?id=1',
-    success: true
+    title: '로그인',
+    linkUrl: '/login'
   },
   {
-    title: 'Api 테스트(list)',
-    linkUrl: '/api-list',
-    success: true
+    title: '회원가입',
+    linkUrl: '/signup'
   },
   {
-    title: 'Api 테스트(detail)',
-    linkUrl: '/api-detail?id=1',
-    success: true
+    title: '회사별테스트',
+    linkUrl: '',
+    childId: 'company',
+    child: [
+      { title: '메뉴', linkUrl: '/company/menu' },
+      { title: '권한', linkUrl: '/company/auth' }
+    ]
   },
   {
-    title: 'company-code-test',
-    linkUrl: '/company-code-test',
-    success: true
+    title: '달력컴포넌트',
+    linkUrl: '',
+    childId: 'calendar',
+    child: [
+      { title: 'ex1', linkUrl: '/calendar/ex1' },
+      { title: 'ex2', linkUrl: '/calendar/ex2' },
+      { title: 'form 전송', linkUrl: '/calendar/form' }
+    ]
+  },
+  {
+    title: '로컬 네비게이션',
+    linkUrl: '/네비게이션'
+  },
+  {
+    title: '드래그앤드랍',
+    linkUrl: '/dragdrop'
+  },
+  {
+    title: '로딩바, noti, alert, confirm',
+    linkUrl: '/dragdrop'
   }
 ];
 
