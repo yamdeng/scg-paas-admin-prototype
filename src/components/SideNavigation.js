@@ -59,12 +59,12 @@ const menuMappingInfos = [
     linkUrl: '/signup'
   },
   {
-    title: '회사별테스트',
+    title: '드래그앤드랍',
     linkUrl: '',
-    childId: 'company',
+    childId: 'dragdrop',
     child: [
-      { title: '메뉴', linkUrl: '/company/menu' },
-      { title: '권한', linkUrl: '/company/auth' }
+      { title: '테스트', linkUrl: '/dragdrop/test' },
+      { title: '서버', linkUrl: '/dragdrop/server' }
     ]
   },
   {
@@ -82,12 +82,8 @@ const menuMappingInfos = [
     linkUrl: '/네비게이션'
   },
   {
-    title: '드래그앤드랍',
-    linkUrl: '/dragdrop'
-  },
-  {
     title: '로딩바, noti, alert, confirm',
-    linkUrl: '/dragdrop'
+    linkUrl: '/alert'
   }
 ];
 
