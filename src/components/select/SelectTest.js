@@ -18,66 +18,94 @@ const options = [
 class SelectTest extends React.Component {
   constructor(props) {
     super(props);
+    let defaultSelect1Data = { value: 'chocolate', label: 'Chocolate' };
+    let defaultSelect2Data = [
+      {
+        id: '1A',
+        value: '1A',
+        name: '안용성1',
+        label: '안용성1',
+        dept: 'scglab'
+      },
+      {
+        id: '1H',
+        value: '1H',
+        name: '황승연1',
+        label: '황승연1',
+        dept: 'scglab'
+      }
+    ];
     this.state = {
       selectedOption: null,
-      selectedOption2: null,
-      select2Data: []
+      selectedOption2: defaultSelect2Data,
+      select1Data: defaultSelect1Data,
+      select2Data: defaultSelect2Data
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChange2 = this.handleChange2.bind(this);
-    this.onInputChange = this.onInputChange.bind(this);
+    this.promiseOptions = this.promiseOptions.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
-  handleChange(selectedOption) {
-    this.setState({ selectedOption });
+  promiseOptions(inputValue) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        Api.get('selectSearch', {
+          params: { search: inputValue },
+          disableLoadingBar: true
+        }).then(result => {
+          let searchResult = result.data;
+          searchResult.forEach(searchInfo => {
+            searchInfo.value = searchInfo.id;
+            searchInfo.label = searchInfo.name;
+          });
+          this.setState({ select2Data: searchResult });
+          resolve(searchResult);
+        });
+      }, 1000);
+    });
+  }
+
+  handleChange(select1Data) {
+    this.setState({ select1Data });
   }
 
   handleChange2(selectedOption2) {
     this.setState({ selectedOption2 });
   }
 
-  onInputChange(inputValue, action) {
-    // debugger;
-    // Api.get('selectSearch', { params: { search: inputValue } }).then(result => {
-    //   this.setState({ select2Data: result.data.data });
-    // });
-    if (action === 'input-change') {
-      debugger;
-      Api.get('selectSearch', { params: { search: inputValue } }).then(
-        result => {
-          this.setState({ select2Data: result.data.data });
-        }
-      );
-    }
+  submit() {
+    let selectedOption = this.state.selectedOption;
+    let selectedOption2 = this.state.selectedOption2;
+    debugger;
   }
-
-  submit() {}
 
   componentDidMount() {
     this.props.appStore.changeHeadTitle('SelectTest');
   }
 
   render() {
-    const { selectedOption, selectedOption2 } = this.state;
     return (
       <div class="container form-test">
         <div class="row">
           <div class="col col-3">select1</div>
           <div class="col col-9">
             <Select
-              value={selectedOption}
               onChange={this.handleChange}
               options={options}
+              value={this.state.select1Data}
             />
           </div>
           <div class="col col-3">select2(ajax)</div>
           <div class="col col-9">
-            {/* <AsyncSelect
+            <AsyncSelect
               isMulti
               cacheOptions
               defaultOptions
-              loadOptions={promiseOptions}
-            /> */}
+              loadOptions={this.promiseOptions}
+              onChange={this.handleChange2}
+              value={this.state.selectedOption2}
+            />
           </div>
           <div class="col col-3">라벨3</div>
           <div class="col col-9">값3</div>
