@@ -7,6 +7,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import SignUp from './SignUp';
+import Login from './Login';
 import App2 from './App2';
 import * as serviceWorker from './serviceWorker';
 
@@ -32,6 +33,8 @@ let AppComponent = <App />;
 let appType = urlQuery.appType;
 if (appType && appType === 'signup') {
   AppComponent = <SignUp />;
+} else if (appType && appType === 'login') {
+  AppComponent = <Login />;
 }
 
 let companyCode = urlQuery.companyCode;

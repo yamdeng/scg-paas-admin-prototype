@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Route, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
+import queryString from 'query-string';
+import axios from 'axios';
 import SideNavigation from './components/SideNavigation';
 import Home from './components/Home';
 import Login from './Login';
@@ -109,6 +111,24 @@ class App extends Component {
 
   componentDidMount() {
     this.init();
+    let search = this.props.location.search;
+    let urlQuery = queryString.parse(search);
+    if (urlQuery && urlQuery.checkLogin === 'true') {
+      // config.headers.authorization
+      let authToken = Helper.getInfoByLocalStorage('authToken');
+      axios
+        .get('/api/loginUserInfo', {
+          headers: { authorization: authToken }
+        })
+        .then(result => {
+          let loginInfo = result.data.loginInfo;
+          this.props.appStore.setLoginInfo(loginInfo);
+        })
+        .catch(error => {
+          window.location.href = '/#/?appType=login';
+          window.location.reload();
+        });
+    }
   }
 
   componentWillUnmount() {

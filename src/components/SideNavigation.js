@@ -39,10 +39,7 @@ const menuMappingInfos = [
     title: 'select 컴포넌트',
     linkUrl: '',
     childId: 'select',
-    child: [
-      { title: '테스트', linkUrl: '/select/test' },
-      { title: '폼연동', linkUrl: '/select/form' }
-    ]
+    child: [{ title: '테스트', linkUrl: '/select/test' }]
   },
   {
     title: '에디터',
