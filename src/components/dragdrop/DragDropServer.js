@@ -43,7 +43,7 @@ const getListStyle = isDraggingOver => ({
 @withRouter
 @inject('appStore')
 @observer
-class DragDropTest extends React.Component {
+class DragDropServer extends React.Component {
   constructor(props) {
     super(props);
     this.state = { items: getItems(10) };
@@ -105,4 +105,4 @@ class DragDropTest extends React.Component {
   }
 }
 
-export default DragDropTest;
+export default DragDropServer;

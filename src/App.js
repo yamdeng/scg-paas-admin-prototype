@@ -30,6 +30,7 @@ import FormEdit from './components/form/FormEdit';
 import ColorTest from './components/color/ColorTest';
 import SelectTest from './components/select/SelectTest';
 import DragDropTest from './components/dragdrop/DragDropTest';
+import DragDropServer from './components/dragdrop/DragDropServer';
 
 @withRouter
 @inject('appStore', 'uiStore', 'companyStore')
@@ -226,6 +227,7 @@ class App extends Component {
             <Route exact path="/color/test" component={ColorTest} />
             <Route exact path="/select/test" component={SelectTest} />
             <Route exact path="/dragdrop/test" component={DragDropTest} />
+            <Route exact path="/dragdrop/server" component={DragDropServer} />
           </div>
           {/* {라우팅 설정 end} */}
           <LoadingBarContainer />
