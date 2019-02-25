@@ -3,24 +3,9 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
-const getItems = count =>
-  Array.from({ length: count }, (v, k) => k).map(k => ({
-    id: `item-${k}`,
-    content: `item ${k}`
-  }));
-
-// a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
+import Api from '../../utils/Api';
 
 const grid = 8;
-
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: 'none',
@@ -46,61 +31,86 @@ const getListStyle = isDraggingOver => ({
 class DragDropServer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { items: getItems(10) };
+    this.state = { data: [] };
     this.onDragEnd = this.onDragEnd.bind(this);
+    this.addData = this.addData.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
   onDragEnd(result) {
     if (!result.destination) {
       return;
     }
+    let updateSortIndex = result.destination.index;
+    let updateDargId = result.draggableId;
+    Api.put('dragdropData/' + updateDargId, {
+      sortIndex: updateSortIndex
+    }).then(result => {
+      this.refresh();
+    });
+  }
 
-    const items = reorder(
-      this.state.items,
-      result.source.index,
-      result.destination.index
-    );
+  refresh() {
+    Api.get('dragdropData').then(result => {
+      this.setState({ data: result.data });
+    });
+  }
 
-    this.setState({
-      items
+  addData() {
+    Api.post('dragdropData', {
+      name: 'yamdeng10'
+    }).then(result => {
+      this.refresh();
     });
   }
 
   componentDidMount() {
-    this.props.appStore.changeHeadTitle('DragDropTest 테스트');
+    this.props.appStore.changeHeadTitle('DragDropServer 테스트');
+    this.refresh();
   }
 
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
-            >
-              {this.state.items.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style
-                      )}
-                    >
-                      {item.content}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <React.Fragment>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <div
+                ref={provided.innerRef}
+                style={getListStyle(snapshot.isDraggingOver)}
+              >
+                {this.state.data.map(item => (
+                  <Draggable
+                    key={item.id}
+                    draggableId={item.id}
+                    index={item.sortIndex}
+                  >
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={getItemStyle(
+                          snapshot.isDragging,
+                          provided.draggableProps.style
+                        )}
+                      >
+                        {item.name} {'(' + item.sortIndex + ')'}
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+        <div>
+          <button type="button" class="btn btn-primary" onClick={this.addData}>
+            추가
+          </button>
+        </div>
+      </React.Fragment>
     );
   }
 }
