@@ -164,8 +164,8 @@ class SingleDatePicker extends React.Component {
     super(props);
 
     this.state = {
-      showTime: false,
-      showDateInput: false,
+      showTime: true,
+      showDateInput: true,
       disabled: false,
       value: moment()
     };
@@ -206,6 +206,16 @@ class SingleDatePicker extends React.Component {
     });
   };
 
+  onOk = event => {
+    debugger;
+  };
+
+  onSelect = (value, event) => {
+    // debugger;
+    debugger;
+    this.setState({ singleDisplayValue: value });
+  };
+
   render() {
     const state = this.state;
     const calendar = (
@@ -220,6 +230,10 @@ class SingleDatePicker extends React.Component {
         showDateInput={state.showDateInput}
         disabledDate={disabledDate}
         showClear={true}
+        onOk={this.onOk}
+        onChange={this.onSelect}
+        value={this.state.singleDisplayValue}
+        showOk={true}
       />
     );
     return (
@@ -265,7 +279,6 @@ class SingleDatePicker extends React.Component {
             animation="slide-up"
             calendar={calendar}
             value={state.value}
-            onChange={this.onChange}
             placement="bottomLeft"
             align={{ offset: [0, 25] }}
             showClear={true}
