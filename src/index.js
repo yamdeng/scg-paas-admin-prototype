@@ -1,3 +1,6 @@
+/* eslint react/no-multi-comp:0, no-console:0 */
+
+import 'rc-calendar/assets/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/common.scss';
 import './index.css';
@@ -19,6 +22,11 @@ import queryString from 'query-string';
 
 import Logger from './utils/Logger';
 import AppHistory from './utils/AppHistory';
+
+import moment from 'moment';
+import 'moment/locale/ko';
+import koKR from 'rc-calendar/lib/locale/ko_KR';
+moment.locale('ko');
 
 let urlQuery = queryString.parse(AppHistory.location.search);
 Logger.info('index.js queryInfo : ' + JSON.stringify(urlQuery));

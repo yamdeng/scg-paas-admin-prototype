@@ -31,6 +31,7 @@ import ColorTest from './components/color/ColorTest';
 import SelectTest from './components/select/SelectTest';
 import DragDropTest from './components/dragdrop/DragDropTest';
 import DragDropServer from './components/dragdrop/DragDropServer';
+import RcDatePicker from './components/date-picker/RcDatePicker';
 
 @withRouter
 @inject('appStore', 'uiStore', 'companyStore')
@@ -228,6 +229,7 @@ class App extends Component {
             <Route exact path="/select/test" component={SelectTest} />
             <Route exact path="/dragdrop/test" component={DragDropTest} />
             <Route exact path="/dragdrop/server" component={DragDropServer} />
+            <Route exact path="/calendar/rc" component={RcDatePicker} />
           </div>
           {/* {라우팅 설정 end} */}
           <LoadingBarContainer />
