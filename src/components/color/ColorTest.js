@@ -30,8 +30,8 @@ class ColorTest extends React.Component {
   }
 
   submit() {
-    let color = this.state.color;
-    debugger;
+    // let color = this.state.color;
+    // debugger;
   }
 
   componentDidMount() {

@@ -75,9 +75,9 @@ class SelectTest extends React.Component {
   }
 
   submit() {
-    let selectedOption = this.state.selectedOption;
-    let selectedOption2 = this.state.selectedOption2;
-    debugger;
+    // let selectedOption = this.state.selectedOption;
+    // let selectedOption2 = this.state.selectedOption2;
+    // debugger;
   }
 
   componentDidMount() {

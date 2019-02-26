@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Logger from '../../utils/Logger';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
 import Calendar from 'rc-calendar';
@@ -27,7 +28,7 @@ const timePickerElement = (
 );
 
 function disabledTime(date) {
-  console.log('disabledTime', date);
+  Logger.log('disabledTime', date);
   if (date && date.date() === 15) {
     return {
       disabledHours() {
@@ -43,7 +44,7 @@ function disabledTime(date) {
 }
 
 function disabledDate(current) {
-  console.log('disabledDate : ' + moment(current.valueOf()).format('YYYYMMDD'));
+  Logger.log('disabledDate : ' + moment(current.valueOf()).format('YYYYMMDD'));
   if (!current) {
     // allow empty select
     return false;
@@ -70,7 +71,7 @@ class RcDatePicker extends React.Component {
   }
 
   onChange = value => {
-    console.log('DatePicker change: ', value && value.format(format));
+    Logger.log('DatePicker change: ', value && value.format(format));
     this.setState({
       value
     });
@@ -145,7 +146,7 @@ class Demo extends React.Component {
   }
 
   onChange = value => {
-    console.log('DatePicker change: ', value && value.format(format));
+    Logger.log('DatePicker change: ', value && value.format(format));
     this.setState({
       value
     });
@@ -252,57 +253,6 @@ class Demo extends React.Component {
       </div>
     );
   }
-}
-
-const multiFormats = ['DD/MM/YYYY', 'DD/MM/YY', 'DDMMYY', 'D/M/YY'];
-
-class DemoMultiFormat extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: now
-    };
-  }
-
-  onChange = value => {
-    console.log('Calendar change: ', value && value.format(format));
-    this.setState({
-      value
-    });
-  };
-
-  render() {
-    const state = this.state;
-    return (
-      <div style={{ width: 400, margin: 20 }}>
-        <div style={{ marginBottom: 10 }}>
-          Accepts multiple input formats
-          <br />
-          <small>{multiFormats.join(', ')}</small>
-        </div>
-        <Calendar
-          locale={koKR}
-          style={{ zIndex: 1000 }}
-          dateInputPlaceholder="please input2"
-          format={multiFormats}
-          value={state.value}
-          onChange={this.onChange}
-          focusablePanel={false}
-        />
-      </div>
-    );
-  }
-}
-
-function onStandaloneSelect(value) {
-  console.log('onStandaloneSelect');
-  console.log(value && value.format(format));
-}
-
-function onStandaloneChange(value) {
-  console.log('onStandaloneChange');
-  console.log(value && value.format(format));
 }
 
 export default RcDatePicker;

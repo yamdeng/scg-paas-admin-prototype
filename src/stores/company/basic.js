@@ -58,7 +58,7 @@ let menuInfo = [
     childId: 'editor',
     child: [
       { title: 'ckeditor', linkUrl: '/editor/ckeditor' },
-      { title: 'ckeditor', linkUrl: '/editor/summernote' }
+      { title: 'summernote', linkUrl: '/editor/summernote' }
     ]
   },
   {
@@ -84,7 +84,8 @@ let menuInfo = [
     childId: 'calendar',
     child: [
       { title: 'rc-calendar', linkUrl: '/calendar/rc' },
-      { title: 'rc-calendar-final', linkUrl: '/calendar/final' }
+      { title: 'rc-calendar-final', linkUrl: '/calendar/final' },
+      { title: 'date-range', linkUrl: '/calendar/date-range' }
     ]
   },
   {

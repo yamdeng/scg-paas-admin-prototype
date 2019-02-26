@@ -173,8 +173,8 @@ class SingleDatePicker extends React.Component {
   }
 
   submit() {
-    let value = this.state.value;
-    let valueString = value.format(Config.dateDisplayFormat);
+    // let value = this.state.value;
+    // let valueString = value.format(Config.dateDisplayFormat);
     debugger;
   }
 
@@ -344,8 +344,8 @@ class RangeDatePicker extends React.Component {
   submit() {
     let value = this.state.value;
     if (value.length > 1) {
-      let startString = value[0].format(Config.dateDisplayFormat);
-      let endString = value[1].format(Config.dateDisplayFormat);
+      // let startString = value[0].format(Config.dateDisplayFormat);
+      // let endString = value[1].format(Config.dateDisplayFormat);
       debugger;
     }
   }

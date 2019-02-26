@@ -1,4 +1,4 @@
-import DevTools from 'mobx-react-devtools';
+// import DevTools from 'mobx-react-devtools';
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Route, withRouter } from 'react-router-dom';
@@ -33,6 +33,7 @@ import DragDropTest from './components/dragdrop/DragDropTest';
 import DragDropServer from './components/dragdrop/DragDropServer';
 import RcDatePicker from './components/date-picker/RcDatePicker';
 import RcDatePickerFinal from './components/date-picker/RcDatePickerFinal';
+import DateRangeTest from './components/date-picker/DateRangeTest';
 
 @withRouter
 @inject('appStore', 'uiStore', 'companyStore')
@@ -232,6 +233,11 @@ class App extends Component {
             <Route exact path="/dragdrop/server" component={DragDropServer} />
             <Route exact path="/calendar/rc" component={RcDatePicker} />
             <Route exact path="/calendar/final" component={RcDatePickerFinal} />
+            <Route
+              exact
+              path="/calendar/date-range"
+              component={DateRangeTest}
+            />
           </div>
           {/* {라우팅 설정 end} */}
           <LoadingBarContainer />

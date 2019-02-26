@@ -11,7 +11,6 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import SignUp from './SignUp';
 import Login from './Login';
-import App2 from './App2';
 import * as serviceWorker from './serviceWorker';
 
 import { HashRouter as Router } from 'react-router-dom';
@@ -25,7 +24,6 @@ import AppHistory from './utils/AppHistory';
 
 import moment from 'moment';
 import 'moment/locale/ko';
-import koKR from 'rc-calendar/lib/locale/ko_KR';
 moment.locale('ko');
 
 let urlQuery = queryString.parse(AppHistory.location.search);

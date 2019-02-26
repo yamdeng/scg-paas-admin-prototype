@@ -47,7 +47,7 @@ const menuMappingInfos = [
     childId: 'editor',
     child: [
       { title: 'ckeditor', linkUrl: '/editor/ckeditor' },
-      { title: 'ckeditor', linkUrl: '/editor/summernote' }
+      { title: 'summernote', linkUrl: '/editor/summernote' }
     ]
   },
   {
@@ -73,7 +73,8 @@ const menuMappingInfos = [
     childId: 'calendar',
     child: [
       { title: 'rc-calendar', linkUrl: '/calendar/rc' },
-      { title: 'rc-calendar-final', linkUrl: '/calendar/final' }
+      { title: 'rc-calendar-final', linkUrl: '/calendar/final' },
+      { title: 'date-range', linkUrl: '/calendar/date-range' }
     ]
   },
   {
@@ -125,7 +126,7 @@ class SideNavigation extends React.Component {
             let menuComponent = null;
             if (menuInfo.child && menuInfo.child.length) {
               menuComponent = (
-                <li className="active">
+                <li className="active" key={menuInfo.title}>
                   <a
                     href={'#' + menuInfo.childId}
                     data-toggle="collapse"

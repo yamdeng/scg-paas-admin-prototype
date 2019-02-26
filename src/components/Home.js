@@ -2,8 +2,8 @@ import React from 'react';
 
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
-import Logger from '../utils/Logger';
-import AppHistory from '../utils/AppHistory';
+// import Logger from '../utils/Logger';
+// import AppHistory from '../utils/AppHistory';
 
 @withRouter
 @inject('appStore')
