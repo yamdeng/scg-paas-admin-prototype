@@ -4,30 +4,26 @@ import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/lib/Picker';
+import RangeCalendar from 'rc-calendar/lib/RangeCalendar';
 import koKR from 'rc-calendar/lib/locale/ko_KR';
 import 'rc-time-picker/assets/index.css';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
 import moment from 'moment';
 import 'moment/locale/ko';
+import Config from '../../config/Config';
+import Logger from '../../utils/Logger';
 moment.locale('ko');
 
-const format = 'YYYY-MM-DD HH:mm:ss';
-
-const now = moment();
-
 function getFormat(time) {
-  return time ? format : 'YYYY-MM-DD';
+  return Config.dateDisplayFormat;
 }
-
-const defaultCalendarValue = now.clone();
-defaultCalendarValue.add(-1, 'month');
 
 const timePickerElement = (
   <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />
 );
 
 function disabledTime(date) {
-  console.log('disabledTime', date);
+  Logger.log('disabledTime', date);
   if (date && date.date() === 15) {
     return {
       disabledHours() {
@@ -42,8 +38,58 @@ function disabledTime(date) {
   };
 }
 
+function newArray(start, end) {
+  const result = [];
+  for (let i = start; i < end; i++) {
+    result.push(i);
+  }
+  return result;
+}
+
+function disabledTime2(time, type) {
+  Logger.log('disabledTime', time, type);
+  if (type === 'start') {
+    return {
+      disabledHours() {
+        const hours = newArray(0, 60);
+        hours.splice(20, 4);
+        return hours;
+      },
+      disabledMinutes(h) {
+        if (h === 20) {
+          return newArray(0, 31);
+        } else if (h === 23) {
+          return newArray(30, 60);
+        }
+        return [];
+      },
+      disabledSeconds() {
+        return [55, 56];
+      }
+    };
+  }
+  return {
+    disabledHours() {
+      const hours = newArray(0, 60);
+      hours.splice(2, 6);
+      return hours;
+    },
+    disabledMinutes(h) {
+      if (h === 20) {
+        return newArray(0, 31);
+      } else if (h === 23) {
+        return newArray(30, 60);
+      }
+      return [];
+    },
+    disabledSeconds() {
+      return [55, 56];
+    }
+  };
+}
+
 function disabledDate(current) {
-  console.log('disabledDate : ' + moment(current.valueOf()).format('YYYYMMDD'));
+  Logger.log('disabledDate : ' + moment(current.valueOf()).format('YYYYMMDD'));
   if (!current) {
     // allow empty select
     return false;
@@ -70,7 +116,6 @@ class RcDatePickerFinal extends React.Component {
   }
 
   onChange = value => {
-    console.log('DatePicker change: ', value && value.format(format));
     this.setState({
       value
     });
@@ -101,38 +146,21 @@ class RcDatePickerFinal extends React.Component {
   render() {
     return (
       <div>
-        {/* <div style={{ margin: 10 }}>
-          <Calendar
-            showWeekNumber={false}
-            locale={koKR}
-            defaultValue={now}
-            disabledTime={disabledTime}
-            showToday
-            format={getFormat(true)}
-            showOk={false}
-            timePicker={timePickerElement}
-            onChange={onStandaloneChange}
-            disabledDate={disabledDate}
-            onSelect={onStandaloneSelect}
-            renderFooter={mode => null}
-          />
-        </div> */}
         <div style={{ float: 'left', width: 300 }}>
-          <Demo defaultValue={now} />
+          <SingleDatePicker defaultValue={moment()} />
         </div>
-        {/* <div style={{ float: 'right', width: 300 }}>
-          <Demo defaultCalendarValue={defaultCalendarValue} />
+        <br />
+        <br />
+        <br />
+        <div style={{ margin: 100 }}>
+          <RangeDatePicker />
         </div>
-        <div style={{ clear: 'both' }} />
-        <div>
-          <DemoMultiFormat />
-        </div> */}
       </div>
     );
   }
 }
 
-class Demo extends React.Component {
+class SingleDatePicker extends React.Component {
   constructor(props) {
     super(props);
 
@@ -145,7 +173,10 @@ class Demo extends React.Component {
   }
 
   onChange = value => {
-    console.log('DatePicker change: ', value && value.format(format));
+    Logger.log(
+      'DatePicker change: ',
+      value && value.format(Config.dateDisplayFormat)
+    );
     this.setState({
       value
     });
@@ -175,13 +206,14 @@ class Demo extends React.Component {
       <Calendar
         locale={koKR}
         style={{ zIndex: 1000 }}
-        dateInputPlaceholder="please input"
+        dateInputPlaceholder="날짜를 선택해주세요"
         format={getFormat(state.showTime)}
         disabledTime={state.showTime ? disabledTime : null}
         timePicker={state.showTime ? timePickerElement : null}
         defaultValue={this.props.defaultCalendarValue}
         showDateInput={state.showDateInput}
         disabledDate={disabledDate}
+        showClear={true}
       />
     );
     return (
@@ -193,7 +225,7 @@ class Demo extends React.Component {
               checked={state.showTime}
               onChange={this.onShowTimeChange}
             />
-            showTime
+            showTime2
           </label>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <label>
@@ -228,12 +260,14 @@ class Demo extends React.Component {
             calendar={calendar}
             value={state.value}
             onChange={this.onChange}
+            align={{ offset: [0, 0] }}
+            showClear={true}
           >
             {({ value }) => {
               return (
                 <span tabIndex="0" className="rc-date">
                   <input
-                    placeholder="please select"
+                    placeholder="날짜를 선택해주세요"
                     style={{ width: 250 }}
                     disabled={state.disabled}
                     readOnly
@@ -243,7 +277,7 @@ class Demo extends React.Component {
                       (value && value.format(getFormat(state.showTime))) || ''
                     }
                   />
-                  <input type="button" />
+                  {/* <input type="button" /> */}
                 </span>
               );
             }}
@@ -254,55 +288,81 @@ class Demo extends React.Component {
   }
 }
 
-const multiFormats = ['DD/MM/YYYY', 'DD/MM/YY', 'DDMMYY', 'D/M/YY'];
+const formatStr = 'YYYY-MM-DD HH:mm:ss';
+function format(v) {
+  return v ? v.format(formatStr) : '';
+}
 
-class DemoMultiFormat extends React.Component {
-  constructor(props) {
-    super(props);
+function isValidRange(v) {
+  return v && v[0] && v[1];
+}
 
-    this.state = {
-      value: now
-    };
-  }
+class RangeDatePicker extends React.Component {
+  state = {
+    value: [],
+    hoverValue: []
+  };
 
   onChange = value => {
-    console.log('Calendar change: ', value && value.format(format));
-    this.setState({
-      value
-    });
+    Logger.log('onChange', value);
+    this.setState({ value });
+  };
+
+  onHoverChange = hoverValue => {
+    this.setState({ hoverValue });
   };
 
   render() {
     const state = this.state;
+    const calendar = (
+      <RangeCalendar
+        hoverValue={state.hoverValue}
+        onHoverChange={this.onHoverChange}
+        showWeekNumber={false}
+        dateInputPlaceholder={['시작일', '종료일']}
+        defaultValue={[
+          moment(),
+          moment()
+            .clone()
+            .add(1, 'months')
+        ]}
+        locale={koKR}
+        disabledTime={disabledTime2}
+        timePicker={timePickerElement}
+        showToday={true}
+        showClear={true}
+      />
+    );
     return (
-      <div style={{ width: 400, margin: 20 }}>
-        <div style={{ marginBottom: 10 }}>
-          Accepts multiple input formats
-          <br />
-          <small>{multiFormats.join(', ')}</small>
-        </div>
-        <Calendar
-          locale={koKR}
-          style={{ zIndex: 1000 }}
-          dateInputPlaceholder="please input2"
-          format={multiFormats}
-          value={state.value}
-          onChange={this.onChange}
-          focusablePanel={false}
-        />
-      </div>
+      <DatePicker
+        value={state.value}
+        onChange={this.onChange}
+        animation="slide-up"
+        calendar={calendar}
+        align={{ offset: [30, 20] }}
+        showClear={true}
+      >
+        {({ value }) => {
+          return (
+            <span>
+              <input
+                placeholder="날짜를 선택해주세요"
+                style={{ width: 350 }}
+                disabled={state.disabled}
+                readOnly
+                className="ant-calendar-picker-input ant-input"
+                value={
+                  (isValidRange(value) &&
+                    `${format(value[0])} - ${format(value[1])}`) ||
+                  ''
+                }
+              />
+            </span>
+          );
+        }}
+      </DatePicker>
     );
   }
-}
-
-function onStandaloneSelect(value) {
-  console.log('onStandaloneSelect');
-  console.log(value && value.format(format));
-}
-
-function onStandaloneChange(value) {
-  console.log('onStandaloneChange');
-  console.log(value && value.format(format));
 }
 
 export default RcDatePickerFinal;
