@@ -175,7 +175,7 @@ class Demo extends React.Component {
     const state = this.state;
     const calendar = (
       <Calendar
-        locale={cn ? zhCN : enUS}
+        locale={koKR}
         style={{ zIndex: 1000 }}
         dateInputPlaceholder="please input"
         format={getFormat(state.showTime)}
