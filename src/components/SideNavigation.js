@@ -73,8 +73,7 @@ const menuMappingInfos = [
     childId: 'calendar',
     child: [
       { title: 'rc-calendar', linkUrl: '/calendar/rc' },
-      { title: 'ex2', linkUrl: '/calendar/ex2' },
-      { title: 'form 전송', linkUrl: '/calendar/form' }
+      { title: 'rc-calendar-final', linkUrl: '/calendar/final' }
     ]
   },
   {

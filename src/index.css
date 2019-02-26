@@ -163,3 +163,19 @@ option[value=''][disabled] {
   padding: 5px;
   border: 2px solid black;
 }
+
+.rc-date input[type="text"] {
+    width: 200px;
+    height: 20px;
+    padding-right: 50px;
+}
+
+.rc-date input[type="button"] {
+    margin-left: -50px;
+    height: 25px;
+    width: 50px;
+    background: blue;
+    color: white;
+    border: 0;
+    -webkit-appearance: none;
+}

@@ -58,7 +58,7 @@ function disabledDate(current) {
 @withRouter
 @inject('appStore')
 @observer
-class RcDatePicker extends React.Component {
+class RcDatePickerFinal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -305,4 +305,4 @@ function onStandaloneChange(value) {
   console.log(value && value.format(format));
 }
 
-export default RcDatePicker;
+export default RcDatePickerFinal;
