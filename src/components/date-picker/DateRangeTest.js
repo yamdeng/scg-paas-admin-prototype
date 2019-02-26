@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ko';
 import Config from '../../config/Config';
+import Logger from '../../utils/Logger';
 moment.locale('ko');
 
 const locale = {
@@ -91,7 +92,20 @@ class DateRangeTest extends React.Component {
         singleDatePicker: true,
         autoApply: false,
         autoUpdateInput: false,
-        locale: locale
+        locale: locale,
+        timePicker: true,
+        minDate: moment()
+          .clone()
+          .add(-30, 'days')
+          .format(Config.dateDisplayFormat),
+        maxDate: moment()
+          .clone()
+          .add(10, 'days')
+          .format(Config.dateDisplayFormat),
+        isInvalidDate: function(date) {
+          Logger.log('isInvalidDate : ' + date.format('YYYY-MM-DD'));
+          return false;
+        }
       },
       this.applySingleDatePicker
     );
@@ -120,7 +134,8 @@ class DateRangeTest extends React.Component {
         opens: 'right',
         autoApply: false,
         autoUpdateInput: false,
-        locale: locale
+        locale: locale,
+        timePicker: true
       },
       this.applyRangeDatePicker
     );
